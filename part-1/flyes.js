@@ -1,32 +1,38 @@
 class Flight {
-	constructor(args) {
-		this.args = args;
+	constructor(args = {}) {
+		this.ticketList = args.ticketList;
+		this.passengers = args.passengers;
+		this.luggage = args.luggage;
 	}
-	boarding() {}
+	boarding(passengers) {
+		this.checkingBag(this.ticketControl(passengers));
+	}
 	checkingBag(passengers) {
-		let filteredArr = [];
-		this.luggage = [];
-		passengers.forEach((el) => {
-			if (el.luggage) filteredArr.push(el);
-			let luggageObj = {};
-			luggageObj.ticket = el.ticket;
-			luggageObj.luggage = el.luggage;
-			this.luggage.push(luggageObj);
+		this.luggage = passengers.map((el) => {
+			if (el.luggage.length !== 0) return { ticket: el.ticket, luggage: el.luggage };
 		});
-		return filteredArr;
+		this.passengers = passengers.map((el) => {
+			el.luggage = [];
+			return el;
+		});
+		return this.passengers;
 	}
 	ticketControl(passengers) {
-		let filteredArr = [];
-		passengers.forEach((el) => {
-			args.ticketList.forEach((elem) => {
-				if (elem === el.ticket) {
-					filteredArr.push(el);
+		this.passengers = passengers.filter((el) => this.ticketList.includes(el.ticket));
+		return this.passengers;
+	}
+	baggageСlaim() {
+		this.passengers = this.passengers.map((elem) => {
+			this.luggage.forEach((el) => {
+				if (elem.ticket.ticket === el.ticket.ticket) {
+					elem.luggage = el.luggage;
 				}
 			});
+			return elem;
 		});
-		return filteredArr;
+		this.luggage = [];
+		return this.passengers;
 	}
-	baggageСlaim() {}
 }
 
 module.exports = Flight;

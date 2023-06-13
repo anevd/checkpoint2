@@ -1,7 +1,7 @@
 class Ticket {
-	constructor(ticketNumber, flightNumber) {
-		this.ticketNumber = ticketNumber;
-		this.flightNumber = flightNumber;
+	constructor(ticket, price) {
+		this.ticket = ticket;
+		this.price = price;
 	}
 }
 
