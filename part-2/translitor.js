@@ -26,11 +26,3 @@ class Translitor {
 }
 
 module.exports = Translitor;
-
-let translitor = new Translitor({
-	path: path.join(__dirname, "."),
-	converter,
-});
-
-// console.log(translitor.convertString("translitThis.txt"));
-translitor.convertString("translitThis.txt");
